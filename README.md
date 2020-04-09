@@ -1,3 +1,5 @@
+Name: Andy Luu
+
 # Dotify
 
 This is a music app that lets you listen to music on the cloud.
