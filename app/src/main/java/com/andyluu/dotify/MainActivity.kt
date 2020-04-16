@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import org.w3c.dom.Text
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -26,11 +28,18 @@ class MainActivity : AppCompatActivity() {
 
         btnChangeUser.setOnClickListener {
             val username = findViewById<TextView>(R.id.username)
-            username.visibility = View.INVISIBLE
-
+            val editUsername = findViewById<EditText>(R.id.editUsername)
+            if (btnChangeUser.text == "Change User") {
+                btnChangeUser.text = "Apply"
+                username.visibility = View.INVISIBLE
+                editUsername.visibility = View.VISIBLE
+            } else if (btnChangeUser.text == "Apply" && editUsername.text.isNotEmpty()) {
+                btnChangeUser.text = "Change User"
+                username.text = editUsername.text
+                username.visibility = View.VISIBLE
+                editUsername.visibility = View.INVISIBLE
+            }
         }
-
-
     }
 
     fun nextClicked(view: View) {
