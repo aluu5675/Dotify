@@ -4,18 +4,15 @@ Name: Andy Luu
 
 This is a music app that lets you listen to music on the cloud.
 
-## Extra Credit
-
-I have completed extra credit #1, #3, and #5.
-
 ## Screenshots
 
-<a href="https://imgur.com/XSPZtf1"><img src="https://i.imgur.com/XSPZtf1.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/YvMYhSx"><img src="https://i.imgur.com/YvMYhSx.png" title="source: imgur.com" /></a>
+
+<a href="https://imgur.com/yQWEOVV"><img src="https://i.imgur.com/yQWEOVV.png" title="source: imgur.com" /></a>
 
 
 ## Installation and Usage
 
-- To change users, select "Change User" and input the username you would like to change to.
-- Select the play button to increase the counter of the number of plays.
-- Select the next button to skip to the next track.
-- Select the previous button to skip to the previous track.
+- To shuffle the playlist, select the shuffle button.
+- Select a track to have it displayed on the mini player container at the bottom of the screen.
+- To launch the album cover and number of plays, select the mini player container on the bottom screen containing the track currently selected.
