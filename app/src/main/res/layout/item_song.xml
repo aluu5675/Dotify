@@ -36,7 +36,7 @@
         app:layout_constraintLeft_toRightOf="@id/songCover"
         app:layout_constraintTop_toBottomOf="@id/songTitle"
         android:layout_marginLeft="16dp"
-        android:text="12dp"
+        android:textSize="12dp"
         />
 
 
