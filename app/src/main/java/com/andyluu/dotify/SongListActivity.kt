@@ -1,5 +1,6 @@
 package com.andyluu.dotify
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -8,6 +9,8 @@ import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_song_list.*
 
 class SongListActivity : AppCompatActivity() {
+
+    private var currentSong: Song? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +21,7 @@ class SongListActivity : AppCompatActivity() {
         val songAdapter = SongListAdapter(allSongs)
 
         songAdapter.onSongClickListener = { song: Song ->
+            currentSong = song
             val playerSong = findViewById<TextView>(R.id.playerSong)
             playerSong.text = "${song.title} - ${song.artist}"
         }
@@ -26,6 +30,15 @@ class SongListActivity : AppCompatActivity() {
             val newSongList = allSongs.shuffled()
 
             songAdapter.change(newSongList)
+        }
+
+        playerSong.setOnClickListener {
+            if (currentSong != null) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("song_key", currentSong)
+
+                startActivity(intent)
+            }
         }
 
         rvSong.adapter = songAdapter

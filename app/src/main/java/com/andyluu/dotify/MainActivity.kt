@@ -7,25 +7,39 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.ericchee.songdataprovider.Song
 import kotlinx.android.synthetic.main.activity_main.*
 import org.w3c.dom.Text
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val SONG_KEY = "song_key"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Song cover and artist
+        val song = intent.getParcelableExtra<Song>(SONG_KEY)
+        imageView.setImageResource(song.largeImageID)
+        trackTitle.text = song.title
+        trackArtist.text = song.artist
+
+        // Number of plays
         var randomNumber = Random.nextInt(1000, 100000)
         var numPlays = findViewById<TextView>(R.id.numPlays)
         numPlays.text = "${randomNumber.toString()} plays"
 
+        // Play button
         btnPlay.setOnClickListener {
             randomNumber += 1
             numPlays.text = "${randomNumber.toString()} plays"
         }
 
+        // Change username
         btnChangeUser.setOnClickListener {
             val username = findViewById<TextView>(R.id.username)
             val editUsername = findViewById<EditText>(R.id.editUsername)
