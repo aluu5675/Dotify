@@ -29,8 +29,7 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
 
         private const val CURRENT_SONG = "current_song"
     }
-
-    @SuppressLint("SetTextI18n")
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
