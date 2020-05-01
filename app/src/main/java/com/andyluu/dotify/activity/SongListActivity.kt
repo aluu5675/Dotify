@@ -1,9 +1,11 @@
-package com.andyluu.dotify
+package com.andyluu.dotify.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.andyluu.dotify.R
+import com.andyluu.dotify.model.SongListAdapter
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_song_list.*
