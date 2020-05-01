@@ -22,7 +22,9 @@ class SongListFragment : Fragment(), OnSongClickListener {
 
     private var onSongClickListener: OnSongClickListener? = null
 
-    private var allSongs: List<Song>? = null
+    private lateinit var allSongs: List<Song>
+
+    private lateinit var songAdapter: SongListAdapter
 
     companion object {
         const val ARG_SONGS = "arg_songs"
@@ -58,7 +60,7 @@ class SongListFragment : Fragment(), OnSongClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val songAdapter = allSongs?.let { SongListAdapter(it) }
+        songAdapter = SongListAdapter(allSongs)
         rvSong.adapter = songAdapter
 
         if (songAdapter != null) {
@@ -69,8 +71,9 @@ class SongListFragment : Fragment(), OnSongClickListener {
 
     }
 
-    private fun shuffleList() {
-
+    fun shuffleList() {
+        allSongs = this.allSongs?.shuffled()
+        songAdapter.change(allSongs)
     }
 
     override fun onSongClicked(song: Song) {

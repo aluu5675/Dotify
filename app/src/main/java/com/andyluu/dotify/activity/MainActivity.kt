@@ -58,6 +58,10 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
                     .commit()
             }
         }
+
+        btnShuffle.setOnClickListener {
+            songListFragment.shuffleList()
+        }
     }
 
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
