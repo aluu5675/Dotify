@@ -3,7 +3,6 @@ package com.andyluu.dotify.activity
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import com.andyluu.dotify.R
 import com.andyluu.dotify.fragment.NowPlayingFragment
@@ -12,7 +11,7 @@ import com.andyluu.dotify.model.OnSongClickListener
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.properties.Delegates
+
 
 class MainActivity : AppCompatActivity(), OnSongClickListener {
 
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
 
         private const val CURRENT_SONG = "current_song"
     }
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -89,10 +88,10 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
 
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+    override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(CURRENT_SONG, currentSong)
 
-        super.onSaveInstanceState(outState, outPersistentState)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onSupportNavigateUp(): Boolean {
