@@ -79,7 +79,6 @@ class NowPlayingFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(PLAY_COUNT, playCount)
-
         super.onSaveInstanceState(outState)
     }
 

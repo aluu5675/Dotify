@@ -36,7 +36,20 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
         if (savedInstanceState != null) {
             with(savedInstanceState) {
                 currentSong = getParcelable(CURRENT_SONG)
-                currentSong?.let { onSongClicked(it) }
+                playerSong.text = "${currentSong?.title} - ${currentSong?.artist}"
+                nowPlayingFragment = NowPlayingFragment()
+                val argumentBundle = Bundle().apply {
+                    putParcelable(NowPlayingFragment.SONG_KEY, currentSong)
+                }
+                nowPlayingFragment!!.arguments = argumentBundle
+                hasBackStack = getBoolean(BACK_STACK)
+                if (hasBackStack) {
+                    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                    miniPlayerContainer.visibility = View.INVISIBLE
+                } else {
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                    miniPlayerContainer.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -90,7 +103,7 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(CURRENT_SONG, currentSong)
-
+        outState.putBoolean(BACK_STACK, hasBackStack)
         super.onSaveInstanceState(outState)
     }
 
