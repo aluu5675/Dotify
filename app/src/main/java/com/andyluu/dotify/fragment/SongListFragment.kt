@@ -27,6 +27,8 @@ class SongListFragment : Fragment(), OnSongClickListener {
     private lateinit var songAdapter: SongListAdapter
 
     companion object {
+        val TAG: String = SongListFragment::class.java.simpleName
+
         const val ARG_SONGS = "arg_songs"
     }
 
@@ -70,6 +72,7 @@ class SongListFragment : Fragment(), OnSongClickListener {
         }
 
     }
+
 
     fun shuffleList() {
         allSongs = this.allSongs?.shuffled()

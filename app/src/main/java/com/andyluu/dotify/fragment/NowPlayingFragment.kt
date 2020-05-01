@@ -25,11 +25,22 @@ class NowPlayingFragment : Fragment() {
     companion object {
         val TAG: String = NowPlayingFragment::class.java.simpleName
 
+        private const val PLAY_COUNT = "play_count"
+
         const val SONG_KEY = "song_key"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                playCount = getInt(PLAY_COUNT)
+            }
+        } else {
+            // Play count
+            playCount = Random.nextInt(1000, 100000)
+        }
 
         arguments?.let { args ->
             val song = args.getParcelable<Song>(SONG_KEY)
@@ -37,9 +48,6 @@ class NowPlayingFragment : Fragment() {
                 currentSong = song
             }
         }
-
-        // Play count
-        playCount = Random.nextInt(1000, 100000)
     }
 
     override fun onCreateView(
@@ -67,6 +75,12 @@ class NowPlayingFragment : Fragment() {
         }
 
         updateSongViews()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(PLAY_COUNT, playCount)
+
+        super.onSaveInstanceState(outState)
     }
 
     fun updateSong(song: Song) {
