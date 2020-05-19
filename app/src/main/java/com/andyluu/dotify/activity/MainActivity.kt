@@ -3,13 +3,15 @@ package com.andyluu.dotify.activity
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.andyluu.dotify.R
 import com.andyluu.dotify.fragment.NowPlayingFragment
 import com.andyluu.dotify.fragment.SongListFragment
+import com.andyluu.dotify.model.DotifyApp
 import com.andyluu.dotify.model.OnSongClickListener
 import com.ericchee.songdataprovider.Song
-import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -22,6 +24,8 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
     private var hasBackStack = false
 
     private var currentSong: Song? = null
+
+    var allSongs: List<Song> = listOf()
 
     companion object {
         private const val BACK_STACK = "back_stack"
@@ -55,13 +59,13 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
 
         if (getSongListFragment() == null) {
             songListFragment = SongListFragment()
-            val argumentBundle = Bundle().apply {
-                val allSongs: List<Song> = SongDataProvider.getAllSongs()
-                val arraySongs: ArrayList<Song> = arrayListOf<Song>()
-                arraySongs.addAll(allSongs)
-                putParcelableArrayList(SongListFragment.ARG_SONGS, arraySongs)
-            }
-            songListFragment.arguments = argumentBundle
+            val apiManager = (application as DotifyApp).apiManager
+            apiManager.fetchSongs ({ listOfSongs ->
+                allSongs = listOfSongs.songs
+                songListFragment.updateList(allSongs)
+            }, {
+                Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+            })
 
             supportFragmentManager
                 .beginTransaction()
