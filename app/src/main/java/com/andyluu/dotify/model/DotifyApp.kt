@@ -12,7 +12,7 @@ class DotifyApp: Application() {
     lateinit var musicManager: MusicManager
     lateinit var apiManager: ApiManager
 
-    var allSongs: List<Song> = listOf()
+    var currentSong: Song? = null
 
     override fun onCreate() {
         super.onCreate()

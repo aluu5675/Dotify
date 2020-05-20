@@ -2,6 +2,7 @@ package com.andyluu.dotify.manager
 
 import com.ericchee.songdataprovider.Song
 
+
 class MusicManager {
 
     private var currentSong: Song? = null
@@ -28,5 +29,9 @@ class MusicManager {
 
     fun isPlaying () {
 
+    }
+
+    fun setCurrentSong(song: Song) {
+        currentSong = song
     }
 }

@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.andyluu.dotify.R
 import com.andyluu.dotify.fragment.NowPlayingFragment
 import com.andyluu.dotify.fragment.SongListFragment
+import com.andyluu.dotify.manager.MusicManager
 import com.andyluu.dotify.model.DotifyApp
 import com.andyluu.dotify.model.OnSongClickListener
 import com.ericchee.songdataprovider.Song
@@ -23,23 +24,24 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
 
     private var hasBackStack = false
 
-    private var currentSong: Song? = null
-
     var allSongs: List<Song> = listOf()
+
+    lateinit var musicManager: MusicManager
 
     companion object {
         private const val BACK_STACK = "back_stack"
 
-        private const val CURRENT_SONG = "current_song"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        musicManager = MusicManager()
+
         if (savedInstanceState != null) {
             with(savedInstanceState) {
-                currentSong = getParcelable(CURRENT_SONG)
+                var currentSong = musicManager.getCurrentSong()
                 playerSong.text = "${currentSong?.title} - ${currentSong?.artist}"
                 nowPlayingFragment = NowPlayingFragment()
                 val argumentBundle = Bundle().apply {
@@ -106,7 +108,6 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
     private fun getNowPlayingFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable(CURRENT_SONG, currentSong)
         outState.putBoolean(BACK_STACK, hasBackStack)
         super.onSaveInstanceState(outState)
     }
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
     }
 
     override fun onSongClicked(song: Song) {
-        currentSong = song
+        musicManager.setCurrentSong(song)
         playerSong.text = "${song.title} - ${song.artist}"
         nowPlayingFragment = getNowPlayingFragment()
         if (nowPlayingFragment == null) {
