@@ -1,4 +1,5 @@
-Name: Andy Luu
+Name: Andy Luu 
+<br>
 Homework 4 – Application, JSON parsing & Network Requests
 
 # Dotify
