@@ -26,8 +26,8 @@ class MusicManager {
 
     }
 
-    fun isPlaying () {
-
+    fun isPlaying (): Boolean {
+        return currentSong == null
     }
 
     fun setCurrentSong(song: Song) {

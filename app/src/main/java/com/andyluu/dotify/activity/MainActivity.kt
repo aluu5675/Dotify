@@ -1,9 +1,7 @@
 package com.andyluu.dotify.activity
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.andyluu.dotify.R
@@ -31,7 +29,6 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
         private const val ALL_SONGS = "all_songs"
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -122,7 +119,6 @@ class MainActivity : AppCompatActivity(), OnSongClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         val arraySongs: ArrayList<Song> = arrayListOf<Song>()
         arraySongs.addAll(allSongs)
-        Log.i("hhhh", "${arraySongs}")
         outState.putParcelableArrayList(ALL_SONGS, arraySongs)
         outState.putBoolean(BACK_STACK, hasBackStack)
         super.onSaveInstanceState(outState)
