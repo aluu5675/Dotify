@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.andyluu.dotify.R
-import com.ericchee.songdataprovider.Song
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_song.view.*
 
-class SongListAdapter (private var listOfSongs: List<Song>): RecyclerView.Adapter<SongListAdapter.SongViewHolder>() {
+class SongListAdapter(private var listOfSongs: List<com.andyluu.dotify.model.Song>): RecyclerView.Adapter<SongListAdapter.SongViewHolder>() {
 
     var onSongClickListener: ((song: Song) -> Unit)? = null
 
@@ -24,7 +24,7 @@ class SongListAdapter (private var listOfSongs: List<Song>): RecyclerView.Adapte
         holder.bind(songTrack)
     }
 
-    fun change(newSongList: List<Song>) {
+    fun change(newSongList: List<com.andyluu.dotify.model.Song>) {
         listOfSongs = newSongList
         notifyDataSetChanged()
     }
@@ -32,7 +32,7 @@ class SongListAdapter (private var listOfSongs: List<Song>): RecyclerView.Adapte
     inner class SongViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         fun bind(song: Song) {
-            itemView.songCover.setImageResource(song.smallImageID)
+            Picasso.get().load(song.smallImageURL).into(itemView.songCover)
             itemView.songTitle.text = song.title
             itemView.songArtist.text = song.artist
 

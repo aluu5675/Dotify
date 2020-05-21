@@ -1,7 +1,6 @@
 package com.andyluu.dotify.manager
 
-import com.ericchee.songdataprovider.Song
-
+import com.andyluu.dotify.model.Song
 
 class MusicManager {
 

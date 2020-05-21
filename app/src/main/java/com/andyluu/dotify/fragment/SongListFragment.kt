@@ -2,21 +2,15 @@ package com.andyluu.dotify.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.andyluu.dotify.R
-import com.andyluu.dotify.model.AllSongs
-import com.andyluu.dotify.model.DotifyApp
 import com.andyluu.dotify.model.OnSongClickListener
+import com.andyluu.dotify.model.Song
 import com.andyluu.dotify.model.SongListAdapter
-import com.ericchee.songdataprovider.Song
-import com.ericchee.songdataprovider.SongDataProvider
-import kotlinx.android.synthetic.main.activity_song_list.*
 import kotlinx.android.synthetic.main.activity_song_list.rvSong
-import kotlinx.android.synthetic.main.fragment_song_list.*
 
 /**
  * A simple [Fragment] subclass.
@@ -38,7 +32,12 @@ class SongListFragment : Fragment(), OnSongClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        songAdapter = SongListAdapter(allSongs)
+        arguments?.let { args ->
+            val allSongs = args.getParcelableArrayList<Song>(ARG_SONGS)
+            if (allSongs != null) {
+                this.allSongs = allSongs
+            }
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -60,6 +59,7 @@ class SongListFragment : Fragment(), OnSongClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        songAdapter = SongListAdapter(allSongs)
         rvSong.adapter = songAdapter
 
         if (songAdapter != null) {
@@ -72,7 +72,6 @@ class SongListFragment : Fragment(), OnSongClickListener {
 
     fun updateList(songList: List<Song>) {
         allSongs = songList
-        Log.i("gds", "${allSongs}")
         songAdapter.change(allSongs)
     }
 

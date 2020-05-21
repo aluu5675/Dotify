@@ -16,33 +16,34 @@ class SongListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_song_list)
+        /*   super.onCreate(savedInstanceState)
+           setContentView(R.layout.activity_song_list)
 
-        val allSongs: List<Song> = SongDataProvider.getAllSongs()
+           val allSongs: List<Song> = SongDataProvider.getAllSongs()
 
-        val songAdapter = SongListAdapter(allSongs)
+           val songAdapter = SongListAdapter(allSongs)
 
-        songAdapter.onSongClickListener = { song: Song ->
-            currentSong = song
-            val playerSong = findViewById<TextView>(R.id.playerSong)
-            playerSong.text = "${song.title} - ${song.artist}"
-        }
+           songAdapter.onSongClickListener = { song: Song ->
+               currentSong = song
+               val playerSong = findViewById<TextView>(R.id.playerSong)
+               playerSong.text = "${song.title} - ${song.artist}"
+           }
 
-        btnShuffle.setOnClickListener{
-            val newSongList = allSongs.shuffled()
+           btnShuffle.setOnClickListener{
+               val newSongList = allSongs.shuffled()
 
-            songAdapter.change(newSongList)
-        }
+               songAdapter.change(newSongList)
+           }
 
-        playerSong.setOnClickListener {
-            if (currentSong != null) {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("song_key", currentSong)
+           playerSong.setOnClickListener {
+               if (currentSong != null) {
+                   val intent = Intent(this, MainActivity::class.java)
+                   intent.putExtra("song_key", currentSong)
 
-                startActivity(intent)
-            }
-        }
+                   startActivity(intent)
+               }
+           }
 
-        rvSong.adapter = songAdapter
+           rvSong.adapter = songAdapter*/
     }
 }

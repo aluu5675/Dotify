@@ -31,12 +31,4 @@ class ApiManager(context: Context) {
 
         queue.add(request)
     }
-
-    fun fetchArtists() {
-
-    }
-
-    fun fetchUserInfo() {
-
-    }
 }

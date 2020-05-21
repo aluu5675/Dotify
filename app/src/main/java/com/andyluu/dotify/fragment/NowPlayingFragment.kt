@@ -1,16 +1,15 @@
 package com.andyluu.dotify.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 
 import com.andyluu.dotify.R
-import com.ericchee.songdataprovider.Song
+import com.andyluu.dotify.model.Song
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_now_playing.*
 import kotlin.random.Random
 
@@ -83,7 +82,7 @@ class NowPlayingFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
-    fun updateSong(song: Song) {
+    fun updateSong(song: com.andyluu.dotify.model.Song) {
         this.currentSong = song
         playCount = Random.nextInt(1000, 100000)
         updateSongViews()
@@ -91,7 +90,7 @@ class NowPlayingFragment : Fragment() {
 
     private fun updateSongViews() {
         currentSong?.let { song ->
-            trackCover.setImageResource(song.largeImageID)
+            Picasso.get().load(song.largeImageURL).into(trackCover)
             trackTitle.text = song.title
             trackArtist.text = song.artist
             numPlays.text = "${playCount.toString()} plays"

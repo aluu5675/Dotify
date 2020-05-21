@@ -1,7 +1,5 @@
 package com.andyluu.dotify.model
 
-import com.ericchee.songdataprovider.Song
-
 data class AllSongs(
     val title: String,
     val numOfSongs: Int,
